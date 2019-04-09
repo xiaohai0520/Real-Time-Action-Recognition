@@ -6,11 +6,8 @@ A small program for action recognition on C3D
 ## Content
 - [Deployment](#deployment)
 - [Usage](#usage)
-  - [Input](#input)
-  - [Output](#output)
-- [Anaylsis](#analysis)
-  - [Influence](#influence)
-  - [Optimization](#optimization)
+  - [Dataset](#dataset)
+  - [Experiments](#experiments)
 - [Reference](#reference)
 
 # Deployment
@@ -18,79 +15,81 @@ A small program for action recognition on C3D
 The program depends on *[Pytorch](https://github.com/pytorch/pytorch)*,*[OpenCV](https://github.com/opencv/opencv)*,*[PyQt](https://github.com/PyQt5/PyQt)* and so on.  
 
 # Usage
+1. Install dependency:
+    For PyTorch dependency, see [pytorch.org](https://pytorch.org/) for more details.
 
-```
-Clusters unweighted undirected input network (graph) considering overlaps and
-building Exact Structural Graph
+    For custom dependencies:
+    ```Shell
+    conda install opencv
+    pip install tqdm scikit-learn tensorboardX
+    pip install pyqt5
+    ```
+2. Download pretrained model from [BaiduYun](https://pan.baidu.com/s/1saNqGBkzZHwZpG-A5RDLVw) or 
+[GoogleDrive](https://drive.google.com/file/d/19NWziHWh1LgCcHU34geoKwYezAogv9fX/view?usp=sharing).   
 
-Usage: RUN_PSCAN [OPTIONS]... [input_network]...
+3. Configure your dataset and pretrained model path.
 
-input_network  - the input graph specified as a file in the TXT type.
+4. Train the Model.
 
-  -inputnetwork        Path of the data file.
-  -outputnetwork       Mode of the graph database.
-  -eps                 The threshold of the similar for the clusters.
-  -miu                 The least number for the clusters.
-```
-For example
-```
-$java RUN_PSCAN ./data/data.txt ./model 0.51 4
+    ```Shell
+    python train.py
+    ```
+5. Run the GUI to test on camera.
+    ```Shell
+    python GUI.py
 
-```
+    ```
 
-## Input
-The undirected unweighted input network to be clustered is specified in the TXT format files:
+## Datasets:
+Dataset directory tree is shown below
 
+- **UCF101**
+Make sure to put the files as the following structure:
+  ```
+  UCF-101
+  ├── ApplyEyeMakeup
+  │   ├── v_ApplyEyeMakeup_g01_c01.avi
+  │   └── ...
+  ├── ApplyLipstick
+  │   ├── v_ApplyLipstick_g01_c01.avi
+  │   └── ...
+  └── Archery
+  │   ├── v_Archery_g01_c01.avi
+  │   └── ...
+  ```
+After pre-processing, the output dir's structure is as follows:
+  ```
+  ucf101
+  ├── ApplyEyeMakeup
+  │   ├── v_ApplyEyeMakeup_g01_c01
+  │   │   ├── 00001.jpg
+  │   │   └── ...
+  │   └── ...
+  ├── ApplyLipstick
+  │   ├── v_ApplyLipstick_g01_c01
+  │   │   ├── 00001.jpg
+  │   │   └── ...
+  │   └── ...
+  └── Archery
+  │   ├── v_Archery_g01_c01
+  │   │   ├── 00001.jpg
+  │   │   └── ...
+  │   └── ...
+  ```
 
-```
-# Example Network
-# Nodes number  
-9
-# Note that the links in the database
-0 1
-0 2
-2 1
-```
-## Output
-The CNL (clusters nodes list) output is a standard format. For example:
-```
-eps: 0.51  miu:4
+## Experiments
+These models were trained in machine with NVIDIA TITAN X 12gb GPU. Note that I splited
+train/val/test data for each dataset using sklearn. If you want to train models using
+official train/val/test data, you can look in [dataset.py](https://github.com/jfzhang95/pytorch-video-recognition/blob/master/dataloaders/dataset.py), and modify it to your needs.
 
-All nodes:
-[0,1,2,3,4,5,6,7,8,9]
+- **UCF101**
 
-Core clusters:
-[0,1,2,3],[5,6,7,8]
-
-non cores:
-[4,9]
-
-All clusters:
-No1: [0,1,2,3,4]
-No2: [4,5,6,7,8,9]
-
-``` 
-<img width="400" height="200" src=https://github.com/xiaohai0520/PSCAN_on_Neo4j/blob/master/image/Picture1.png/>
-
-# Analysis
-
-## Influence
-We do the test for running time on different parameters to test the influence for parameters.
-<img width="400" height="200" src=https://github.com/xiaohai0520/PSCAN_on_Neo4j/blob/master/image/influence.jpg/>
-
-## Optimization
-We implement three optimizations in the pSCAN.
-
-### cross link
-- Cut half of the calculate times in process of checking core.
-### Pruning rule 
-- Find out which vertex pairs are not structure similar before checking.
-### Adaptive structure-similar checking 
-- Compute the minimum number of common neighbors, terminate early if any vertex can match the minimum condition.
-
-<img width="400" height="200" src=https://github.com/xiaohai0520/PSCAN_on_Neo4j/blob/master/image/op.jpg/>
-
+<p align="center"><img src="https://github.com/xiaohai0520/action_recognition_on_C3D/blob/master/image/ucf101_results.png?raw=true" align="center" width=900 height=auto/></p>
 
 
 # Reference
-The paper: *["pSCAN: Fast and Exact Structural Graph Clustering"](https://www.cse.unsw.edu.au/~ljchang/pdf/icde16-pscan.pdf) by Lijun Chang, Wei Li, Xuemin Lin,Lu Qin and Wenjie Zhang, ICDE'16*.
+The paper: *["Learning Spatiotemporal Features with 3D Convolutional Networks"](https://arxiv.org/pdf/1412.0767.pdf) by Du Tran1,2
+, Lubomir Bourdev1
+, Rob Fergus1
+, Lorenzo Torresani2
+, Manohar Paluri1*.
