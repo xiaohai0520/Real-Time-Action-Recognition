@@ -1,7 +1,7 @@
 # Real Time Action Recognition
 A small program for action recognition on C3D
 
-[![watch video](https://github.com/xiaohai0520/action_recognition_on_C3D/blob/master/image/test2.png?raw=true)](https://www.youtube.com/watch?v=6_QowqAsjWs)
+[![watch video](https://github.com/xiaohai0520/action_recognition_on_C3D/blob/master/image/test2.png?raw=true)](https://www.youtube.com/watch?v=C3nn2yPgTWc&feature=youtu.be)
 
 ## Content
 - [Deployment](#deployment)
