@@ -1,6 +1,7 @@
 # action_recognition_on_C3D
 A small program for action recognition on C3D
-[![Watch the video](https://github.com/xiaohai0520/action_recognition_on_C3D/blob/master/image/action-recognition.png?raw=true)](https://www.youtube.com/watch?v=6_QowqAsjWs&feature=youtu.be)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6_QowqAsjWs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 ## Content
 - [Deployment](#deployment)
 - [Usage](#usage)
