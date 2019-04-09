@@ -1,7 +1,8 @@
 # action_recognition_on_C3D
 A small program for action recognition on C3D
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6_QowqAsjWs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![watch video](https://github.com/xiaohai0520/action_recognition_on_C3D/blob/master/image/test2.png?raw=true)](https://www.youtube.com/watch?v=6_QowqAsjWs)
+
 ## Content
 - [Deployment](#deployment)
 - [Usage](#usage)
@@ -14,8 +15,7 @@ A small program for action recognition on C3D
 
 # Deployment
 
-The program depends on the graph database Neo4j. *[Here is the link for Neo4j on the github](https://github.com/neo4j/neo4j)*
-
+The program depends on *[Pytorch](https://github.com/pytorch/pytorch)*,*[OpenCV](https://github.com/opencv/opencv)*,*[PyQt](https://github.com/PyQt5/PyQt)* and so on.  
 
 # Usage
 
@@ -89,6 +89,7 @@ We implement three optimizations in the pSCAN.
 - Compute the minimum number of common neighbors, terminate early if any vertex can match the minimum condition.
 
 <img width="400" height="200" src=https://github.com/xiaohai0520/PSCAN_on_Neo4j/blob/master/image/op.jpg/>
+
 
 
 # Reference
